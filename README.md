@@ -152,13 +152,14 @@ from orders group by category order by total
 
 A diferencia de lo mostrado con la consulta anterior, nos encontramos con que la categoría *American* es la menos solicitada, siendo *Asian* la categoría más popular. Podemos enfocarnos en ampliar la variedad de productos de esa categoria y experimentar para la introducción  de forma más segura de productos de este tipo en el menú. 
 
-3.¿Cuál es el promedio de artículos vendidos por categoría?
+3. ¿Cuál es el promedio de artículos vendidos por categoría?
+
   El promedio de artículos vendidos por categortía nos servirá como un parámetro para evaluar la viabilidad de mantener un producto en el menú, ya que si este se encuentra por debajo de la media de las ventas por categoría, sería un artículo que tiene severas dificultades para llamar la atención de los clientes. 
-    ```
-    Select DISTINCT category, AVG(item_id) as PromedioVentas 
-    from orders group by category order by PromedioVentas desc
-    ```
-    ![image](https://github.com/user-attachments/assets/055aa606-909f-47e5-8ec9-e58a2a2c749c)
+```
+Select DISTINCT category, AVG(item_id) as PromedioVentas 
+from orders group by category order by PromedioVentas desc
+```
+  ![image](https://github.com/user-attachments/assets/055aa606-909f-47e5-8ec9-e58a2a2c749c)
 
 4. ¿Cuáles son los productos menos vendidos?
 
@@ -172,8 +173,10 @@ A diferencia de lo mostrado con la consulta anterior, nos encontramos con que la
   ```
   ![image](https://github.com/user-attachments/assets/eb039b86-bfec-465e-a186-4fdff97b4f3f) 
   
-
+  
 5. ¿Cuál es el producto menos vendido por categoría?
+
+   Con esta consulta podemos observar las tendencias de los productos menos vendidos y hacer una comparación de sus ventas con la media de las ventas por categoría, de tal manera que, si las ventas totales del producto son muy inferiores a la media de la categoría, el producto no tiene mucho éxito entre los clientes y si la distancia es muy alta, se debe considerar si son aptos para conservarse en el menú.
 ```
 Select category, count(item_id) as TotalVendido, item_name as total 
 from orders where category = 'American' group by item_name, category 
@@ -181,6 +184,7 @@ order by TotalVendido asc limit 5
 ```
 ![image](https://github.com/user-attachments/assets/af36d29c-bea5-4ec7-9a5b-bf7c8fd7933e)
 
+Para la categoría *American* la media se encuentra en 103 puntos. Los productos menos populares de esta categoría sobrepasan cuando menos por el doble esa media, por lo cual esta categoría puede ser sometida a un escrutinio más técnico con respecto a las recetas o la calidad de los ingredientes. Se considera que puede tratarse de incrementar la venta de estos productos en lugar de descartarlos directamente del menú. 
 
 ```
 Select category, count(item_id) as TotalVendido, item_name as total 
@@ -190,6 +194,8 @@ order by TotalVendido asc limit 5
 
 ![image](https://github.com/user-attachments/assets/f5e4fd8d-c65c-4f84-948a-f406084d8088)
 
+La categoría *Mexican* tiene una media de 119. El producto menos vendido de la categoría está muy ligeramente por encima de ese valor, por lo cual se considera que ese producto  es candidato a ser reemplazado por un platillo nuevo. El segundo producto menos vendido está casi duplicando el valor de la media de ventas de la categoría, por lo cual no se considera candidato a reemplazo directamente, sin embargo, la categoría es la segunda menos vendida, por lo cual se sugiere que estos productos sean valorados más a profundidad para asegurar su permanencia en el menú. 
+
 ```
 Select category, count(item_id) as TotalVendido, item_name as total 
 from orders where category = 'Italian' group by item_name, category 
@@ -198,6 +204,7 @@ order by TotalVendido asc limit 5
 
 ![image](https://github.com/user-attachments/assets/51663830-c9e5-41f2-b7aa-6d8307627f4d)
 
+La categoría *Italian* tiene el promedio más alto de ventas con 127 puntos. Sin embargo se ve que, incluso los productos menos vendidos de la categoría sobrepasan esa media con ampli margen, por lo cual se considera que tiene una buena posibilidad de incrementar las ventas con modificaciones que puedan ser más económicas, com las mencionadas para el caso de la categoría *American*. 
 ```
 Select category, count(item_id) as TotalVendido, item_name as total 
 from orders where category = 'Asian' group by item_name, category 
@@ -206,7 +213,7 @@ order by TotalVendido asc limit 5
 
 ![image](https://github.com/user-attachments/assets/274c17d2-b573-4164-a2cd-cd018ce8dcc0)
 
-
+La categoría *Asian* tiene una media de 110 puntos. Sin embargo, como es el caso de las categorías *American* e *Italian*, los productos menos vendidos de la categoría superan por amplio margen la media, por lo cual no se considera que sus productos sean candidatos directos a una modificación directa en el menú. Se hace la misma sugerencia que las categorías mencionadas para la evaluación más exhaustiva de los platillos. 
 
    
 
